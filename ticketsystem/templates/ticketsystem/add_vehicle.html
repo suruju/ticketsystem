@@ -1,0 +1,158 @@
+{%extends 'ticketsystem/main.html'%}
+{%block content%}
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-5 d-none d-lg-block yellowbg"></div>
+          <div class="col-lg-7">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Add New Vehicle</h1>
+              </div>
+              
+              <form class="user frontend" method="POST" action="" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <label for="id_vehicle_name">Vehicle Name</label>
+                    {{form.vehicle_name}}
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="id_vehicle_number">Vehicle Number</label>
+                    {{form.vehicle_number}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="id_slug">Slug</label>
+                  {{form.slug}}
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <label for="id_ticketprice">Ticket Price</label>
+                    {{form.ticketprice}}
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="id_departuretime">Departure Time</label>
+                    {{form.departuretime}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <label for="id_vehicleowner">Vehicle Owner</label>
+                    {{form.vehicleowner}}
+                  </div>
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <label for="id_category">Category</label>
+                    {{form.category}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label for="id_departurefrom">Departure From</label>
+                    <select name="departurefrom" class="form-control" required="" id="id_departurefrom">
+                      <option value="" selected="">Departure From</option>
+                      {%for location in route_location%}
+                        <option value="{{location.id}}">{{location}}</option>
+                      {%endfor%}
+                    </select>
+                  </div>
+                  <!-- <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" name="{{form.departurefrom.name}}" id="id_{{form.departurefrom.name}}" placeholder="Departure From">
+                    <div class="dropdown mb-4">
+                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButtonfrom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Departure From
+                      </button>
+                      <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButtonfrom">
+                        
+                        {%for location in route_location%}
+                        <a class="dropdown-item" href="#">{{location}}</a>
+                        {%endfor%}
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="col-sm-6">
+                    <label for="id_departureto">Departure To</label>
+                    <select name="departureto" class="form-control" required="" id="id_departureto">
+                      <option value="" selected="">Departure To</option>
+                      {%for location in route_location%}
+                        <option value="{{location.id}}">{{location}}</option>
+                      {%endfor%}
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label for="id_facility"></label>
+                    {{form.facility}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="custom-file">
+                    {{form.vehicle_photo}}
+                    <label class="custom-file-label" for="customFile">Choose Vehicle Photo</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <label for="id_seatplan">Seat Plan</label>
+                    {{form.seatplan}}
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="id_seatcapacity">Seat Capacity</label>
+                    {{form.seatcapacity}}
+                  </div>
+                </div>
+                <hr>
+                <div class="card mb-4 py-3 border-bottom-primary">
+                  <div class="card-body">
+                      <p>Boarding Point and Time</p>
+                      <div class="form-group">
+                          <label for="id_{{form.boardingpointone.name}}">First Boarding Point and Time</label>
+                          {{form.boardingpointone}}
+                      </div>
+                      <div class="form-group">
+                          <label for="id_{{form.boardingpointtwo.name}}">Second Boarding Point and Time</label>
+                          {{form.boardingpointtwo}}
+                      </div>
+                      <div class="form-group">
+                          <label for="id_{{form.boardingpointthree.name}}">Third Boarding Point and Time</label>
+                          {{form.boardingpointthree}}
+                      </div>
+                    
+                      
+                  </div>
+              </div>
+              
+             
+              <div class="card mb-4 py-3 border-bottom-primary">
+                  <div class="card-body">
+                      <p>Dropoff Zone and Time</p>
+                      
+                      <div class="form-group">
+                          <label for="id_{{form.dropoffpointone.name}}">First Dropoff Point and Time</label>
+                          {{form.dropoffpointone}}
+                      </div>
+                      <div class="form-group">
+                          <label for="id_{{form.dropoffpointtwo.name}}">Second Dropoff Point and Time</label>
+                          {{form.dropoffpointtwo}}
+                      </div>
+                      <div class="form-group">
+                          <label for="id_{{form.dropoffpointthree.name}}">Three Dropoff Point and Time</label>
+                          {{form.dropoffpointthree}}
+                      </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-user btn-block">Add Vehicle</button>
+              </form>
+              {{form.errors}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{%endblock%}

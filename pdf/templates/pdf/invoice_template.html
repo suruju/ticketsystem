@@ -1,0 +1,175 @@
+<head>
+    <style>
+        body{
+            font-size: 12px;
+        }
+        table>tr>td, table>tr>th{
+            vertical-align: top;
+            text-align: left;
+        }
+        table.particular{
+            border:1px solid #000000;
+        }
+        table.particular td,table.particular th{
+            padding-top:3px;
+            padding-left:5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        label{
+            font-weight: 600;
+            
+        }
+        th{
+            font-size: 12px;
+        }
+        .left{
+            width: 70%;
+            
+        }
+        .right{
+            width: 30%;
+            text-align: right;
+            
+        }
+        table.totalslot tr td{
+           padding-top: 3px;
+           padding-left: 5px;
+        }
+        @page {
+            size: a5 landscape;
+            @frame header_frame {           /* Static Frame */
+                -pdf-frame-content: header_content;
+                left: 30pt; width: 535pt; top: 20pt; height: 45pt;
+            }
+            @frame content_frame {          /* Content Frame */
+                left: 30pt; width: 535pt; top: 70pt; height: 350pt;
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 30pt; width: 535pt; top: 390pt; height: 20pt;
+            }
+        }
+    </style>
+    </head>
+    
+    <body>
+        <!-- Content for Static Frame 'header_frame' -->
+        <div id="header_content">
+            <table style="border-bottom: 1px solid #000000;">
+                <tr>
+                    <td class="left">
+                        <h3>{{data.busName}}</h3>
+                    </td>
+                    <td class="right">
+                        <strong>Travel related queries</strong><br/>01-5544662<br/>9841331423
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
+    
+        <!-- Content for Static Frame 'footer_frame' -->
+        <div id="footer_content">
+                <table>
+                    <tr>
+                        <td>
+                            Page <pdf:pagenumber> of <pdf:pagecount>
+                        </td>
+                        <td style="text-align: right;">Powered by: Wishers Tech Pvt. Ltd. [<a href="https://wisherstech.com" target="_blank">wisherstech.com</a>]</td>
+                    </tr>
+                </table>
+        </div>
+    
+        <!-- HTML Content -->
+        
+        <table style="margin-bottom: 5px;">
+                <tr>
+                    <td width=70%><label>Customer Name:</label> {{data.fullname}}</td>
+                    <td><label>Bus No.:</label> </td>
+                </tr>
+                <tr>
+                    <td><label>Customer Address:</label> {{data.address}}</td>
+                    <td><label>Departure Date:</label> {{data.departuredate}}</td>
+                </tr>
+                <tr>
+                    <td><label>Phone:</label> {{data.phone}}</td>
+                    <td><label>Departure Time:</label> {{data.departuretime}}</td>
+                </tr>
+                
+        </table>
+    
+        <table class="particular">
+            <tr>
+     
+                <th style="border-bottom:1px solid #000000; width: 30%;">Departure From</th>
+                <th style="border-bottom:1px solid #000000; width: 30%;">Departure To</th>
+                <th style="border-bottom:1px solid #000000;width: 40%;">Seat Number</th>
+                <!-- <th style="border-bottom:1px solid #000000; text-align: right; width: 15%; padding-right:10px; padding-left: 0;">Total Amount</th> -->
+            </tr>
+            <tr>
+     
+                <td>{{data.departurefrom}}</td>
+                <td>{{data.departureto}}</td>
+                <td>{{data.seatnumber}}</td>
+                <!-- <td style="text-align: right;  padding-right:5px; padding-left: 0;">NRs. {{data.totalprice}}/-</td> -->
+            </tr>
+        </table>
+        <table width:100% style="border: 1px solid #000000;">
+            <tr>
+                <td width=60% style="padding-left: 5px; padding-top: 3px; vertical-align: top;"><strong>In Words</strong><br>{{inword|capfirst}} only.</td>
+                <td width=40%>
+                    <table class='totalslot' style="border:1px solid #000000">
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td style="text-align: right; padding-right:5px; padding-left: 0;">NRs. {{totalamt|floatformat:'2'}}/-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>VAT Amt.</strong></td>
+                            <td style="text-align: right; padding-right:5px; padding-left: 0;">NRs. {{vatamt|floatformat:'2'}}/-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grand Total</strong></td>
+                            <td style="text-align: right; padding-right:5px; padding-left: 0;">NRs. {{data.totalprice}}/-</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td width=60% style="vertical-align: top;">
+                    <p style="padding-top: 10px;"><strong>Remarks if any:</strong></p>
+                </td>
+                <td width='40%' style=" text-align: right; vertical-align: top;">
+                    <p style="padding-top: 10px;"><strong>Authorized Seal and Signature</strong></p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                </td>
+            </tr>
+            
+        </table>
+        <hr>
+        <table>
+            <tr>
+                <td><strong>Pickup Point</strong></td>
+                <td><strong>Dropoff Point</strong></td>
+            </tr>
+            {%for data in vehicle%}
+            <tr>
+                <td>{{data.busid.boardingpointone}}</td>
+                <td>{{data.busid.dropoffpointone}}</td>
+            </tr>
+            <tr>
+                <td>{{data.busid.boardingpointtwo}}</td>
+                <td>{{data.busid.dropoffpointtwo}}</td>
+            </tr>
+            <tr>
+                <td>{{data.busid.boardingpointthree}}</td>
+                <td>{{data.busid.dropoffpointthree}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        
+    </body>
+    </html>

@@ -1,0 +1,36 @@
+{% extends 'ticketsystem/vendorLoggedIn.html' %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+  {% for vehicle in vehicles %}
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{vehicle.vehicle_name}}</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800 vehicle-route">Route:
+                {% for location in route_location %}
+                {% if location.id == vehicle.departurefrom %}
+                {{location.destinationlocation}}
+                {% endif %}
+                {% endfor %} - 
+                {% for location in route_location %}
+                {% if location.id == vehicle.departureto %}
+                {{location.destinationlocation}}
+                {% endif %}
+                {% endfor %}
+              </div>
+              <input class="datepicker form-control" type="text" placeholder="Booking Date"/>
+              <a href="/reservation/{{vehicle.id}}/" class="btn btn-success btn-icon-split btn-sm bookticket">
+                <span class="text">Book A Ticket</span>
+              </a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}

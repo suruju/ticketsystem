@@ -1,0 +1,115 @@
+{%extends 'ticketsystem/main.html'%}
+{%block content%}
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">{{request.user.first_name}} {{request.user.last_name}}'s Profile</h1>
+      <a href="/update_profile/{{user.id}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit"></i> Update Profile</a>
+    </div>
+    <div class="row">
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Company Name</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {% if user.company_name %}
+                  {{user.company_name}}
+                  {% else %}
+                  --------------
+                  {% endif %}
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Address</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {% if user.address %}
+                  {{user.address}}
+                  {% else %}
+                  --------------
+                  {% endif %}
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Phone</div>
+                <div class="row no-gutters align-items-center">
+                  <div class="col-auto">
+                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                      {% if user.phone %}
+                      {{user.phone}}
+                      {% else %}
+                      --------------
+                      {% endif %}
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pending Requests Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Account Status</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {% if user.account_status %}
+                  {{user.account_status}}
+                  {% else %}
+                  --------------
+                  {% endif %}
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Company Info</h6>
+          </div>
+          <div class="card-body">
+            {{user.company_info | safe}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{%endblock%}

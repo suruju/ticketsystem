@@ -1,0 +1,65 @@
+{%extends 'ticketsystem/main.html'%}
+{%block content%}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Vehicles List</h1>
+    <p class="mb-4">List of vehicles owned by logged in user.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Vehicles</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Vehicle Name</th>
+                <th>Route From</th>
+                <th>Route To</th>
+                <th>Departure Time</th>
+                <th>Ticket Price</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Vehicle Name</th>
+                <th>Route From</th>
+                <th>Route To</th>
+                <th>Departure Time</th>
+                <th>Ticket Price</th>
+                <th></th>
+              </tr>
+            </tfoot>
+            <tbody>
+              {% for vehicle in vehicles%}
+              <tr>
+                <td>{{vehicle.vehicle_name}}</td>
+                <td>{{vehicle.departurefrom}}</td>
+                <td>{{vehicle.departureto}}</td>
+                <td>{{vehicle.departuretime}}</td>
+                <td>NRs. {{vehicle.ticketprice}}/-</td>
+                <td>
+                  <a href="/viewvehicle/{{vehicle.id}}" class="btn btn-info btn-circle btn-sm">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <a href="/updateVehicle/{{vehicle.id}}" class="btn btn-warning btn-circle btn-sm">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="/updateVehicle/{{vehicle.id}}" class="btn btn-danger btn-circle btn-sm">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{%endblock%}

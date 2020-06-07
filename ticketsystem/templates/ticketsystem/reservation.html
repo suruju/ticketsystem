@@ -1,0 +1,108 @@
+{% extends 'ticketsystem/vendorLoggedIn.html' %}
+{% block content %}
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-5 d-none d-lg-block bg-gray-600">
+            <div class="reser">
+            {% for seatbook in seat_booked %}
+            {{seatbook.seatnumber}}
+            {% endfor %}
+          </div>
+            <input type="hidden" name="tp" id="tp" value="{{vehicle_id.ticketprice}}">
+            {{seats.seatformt | safe}}
+            
+          </div>
+          <div class="col-lg-7">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Book a Ticket</h1>
+              </div>
+              <form class="user frontend" method="POST" action="">
+                  {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{form.fullname.id_for_label}}">Full Name</label>
+                    {{form.fullname}}
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                      <label for="{{form.address.id_for_label}}">Address</label>
+                    {{form.address}}
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="{{form.phone.id_for_label}}">Phone</label>
+                    {{form.phone}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="{{form.email.id_for_label}}">Email</label>
+                  {{form.email}}
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <label for="{{form.departurefrom.id_for_label}}">Departure From</label>
+                    {% for location in route_location %}
+                    {% if location.id == form.departurefrom.value %}
+                    <input type="text" name="departurefrom" maxlength="100" readonly required_id="id_departurefrom" value="{{location.destinationlocation}}">
+                    {% endif %}
+                    {% endfor %}
+                    
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="{{form.departureto.id_for_label}}">Departure To</label>
+                    {% for location in route_location %}
+                    {% if location.id == form.departureto.value %}
+                    <input type="text" name="departureto" maxlength="100" readonly required_id="id_departureto" value="{{location.destinationlocation}}">
+                    {% endif %}
+                    {% endfor %}
+                    
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <label for="{{form.departuredate.id_for_label}}">Departure Date</label>
+                      <input type="text" name="departuredate" readonly value="{{rd}}">
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="{{form.departuretime.id_for_label}}">Departure Time</label>
+                      {{form.departuretime}}
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <label for="{{form.seatnumber.id_for_label}}">Seat Number</label>
+                      {{form.seatnumber}}
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="{{form.totalprice.id_for_label}}">Total Price</label>
+                      <input type="number" name="totalprice" id="id_totalprice" value="0" min="0" required="" id="id_totalprice">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <label for="{{form.busid.id_for_label}}">Bus ID</label>
+                      <input type="hidden" name="busid" readonly required_id="id_busid" value="{{vehicle_id.id}}">
+                      <input type="text" name="busName" readonly id="id_busName" value="{{vehicle_id.vehicle_name}}">
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <label for="{{form.paymentmode.id_for_label}}">Payment Mode</label>
+                      {{form.paymentmode}}
+                    </div>
+                    
+                  </div>
+
+                <button type="submit" class="btn btn-primary btn-user btn-block">Book Ticket</button>
+                
+              </form>
+              {{form.errors}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

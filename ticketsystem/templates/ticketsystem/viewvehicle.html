@@ -1,0 +1,29 @@
+{% extends 'ticketsystem/main.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Vehicle Info</h1>
+        <a href="/updateVehicle/{{vehicle.id}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit"></i> Update Vehicle</a>
+    </div>
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">{{vehicle.vehicle_name}} Details</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <p><label class="companyinfo_label">Vehicle Name</label>: {{vehicle.vehicle_name}}</p>
+                <p><label class="companyinfo_label">Vehicle Number</label>: {{vehicle.vehicle_number}}</p>
+                <p><label class="companyinfo_label">Category</label>: {{vehicle.category}}</p>
+                <p><label class="companyinfo_label">Route From</label>: {% for dest in destination %}{% if dest.id == vehicle.departurefrom %}{{dest.destinationlocation}}{%endif%}{%endfor%}</p>
+                <p><label class="companyinfo_label">Route To</label>: {% for dest in destination %}{% if dest.id == vehicle.departureto %}{{dest.destinationlocation}}{%endif%}{%endfor%}</p>
+                <p><label class="companyinfo_label">Departure Time</label>: {{vehicle.departuretime}}</p>   
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

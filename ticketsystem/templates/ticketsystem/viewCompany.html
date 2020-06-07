@@ -1,0 +1,67 @@
+{% extends 'ticketsystem/main.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{company.company_name}}</h1>
+        <a href="/update_profile/{{company.id}}/" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Update Profile</a>
+      </div>
+    <div class="row">
+
+        
+        <div class="col-xl-6 col-lg-6">
+          <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">Company Info</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+              <p><label class="companyinfo_label">Legal Person:</label> {{company.authorizedperson}}</p>
+              <p><label class="companyinfo_label">Address:</label> {{company.address}}</p>
+              <p><label class="companyinfo_label">Phone:</label> {{company.phone}}</p>
+              <p><label class="companyinfo_label">Account Status:</label> {{company.account_status}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Company Detail</h6>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                {{company.company_info|safe}}
+              </div>
+            </div>
+          </div>
+    </div>
+    <!-- Content Row -->
+    <div class="row">
+
+        {% for vehicle in vehicles %}
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{vehicle.vehicle_name}}</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">Route: {% for destination in destinations %}{% if destination.id == vehicle.departurefrom%}{{destination.destinationlocation}}{%endif%}{% endfor %} / {% for destination in destinations %}{% if destination.id == vehicle.departureto%}{{destination.destinationlocation}}{%endif%}{% endfor %}</div>
+                </div>
+                <div class="col-auto">
+                    <a href="/viewvehicle/{{vehicle.id}}/{{company.user_auth.id}}/" class="btn btn-info btn-circle btn-sm">
+                        <i class="fas fa-info-circle"></i>
+                      </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        
+
+ 
+
+  </div>
+{% endblock %}
